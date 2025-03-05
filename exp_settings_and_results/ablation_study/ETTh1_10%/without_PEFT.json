@@ -1,0 +1,64 @@
+{
+  "w/o PEFT/avg_mse": 0.6002152191327375,
+  "w/o PEFT/avg_mae": 0.5180479845580993,
+  "w/o PEFT/96_mse": 0.42279261389845296,
+  "w/o PEFT/96_mae": 0.4333449311946568,
+  "w/o PEFT/192_mse": 0.47179754657877815,
+  "w/o PEFT/192_mae": 0.4626004348198573,
+  "w/o PEFT/336_mse": 0.5256991377648186,
+  "w/o PEFT/336_mae": 0.5041476663421182,
+  "w/o PEFT/720_mse": 0.9805715782889004,
+  "w/o PEFT/720_mae": 0.672098905875765,
+  "config": {
+    "enable_supervised_finetuning": true,
+    "first_k_layers": 6,
+    "patch_len": 16,
+    "stride": 8,
+    "seq_len": 512,
+    "ft_mode": "lp_ft",
+    "dropout": 0.1,
+    "token_embed_type": "conv",
+    "token_embed_kernel_size": 7,
+    "temporal_embed_type": "learned",
+    "freq": "t",
+    "peft_method": "none",
+    "peft_params": {
+      "lora": {
+        "r": 16,
+        "lora_alpha": 32,
+        "lora_dropout": 0
+      },
+      "adalora": {
+        "r": 16,
+        "lora_alpha": 32,
+        "lora_dropout": 0.1,
+        "task_type": "FEATURE_EXTRACTION",
+        "target_modules": [
+          "c_attn"
+        ],
+        "fan_in_fan_out": true
+      },
+      "ia3": {
+        "target_modules": [
+          "c_attn"
+        ],
+        "feedforward_modules": [
+          "mlp"
+        ]
+      }
+    },
+    "sft_optim": "AdamW",
+    "sft_learning_rate": 0.0014838277734676884,
+    "sft_lradj": "constant",
+    "sft_weight_decay": 0.0013331487231159165,
+    "sft_train_epochs": 10,
+    "dft_optim": "AdamW",
+    "dft_learning_rate": 9.776360476482794e-05,
+    "dft_lradj": "constant",
+    "dft_weight_decay": 2.8696003883523563e-05,
+    "dft_train_epochs": 10,
+    "peft_params_r": 16,
+    "peft_params_lora_alpha": 32,
+    "peft_params_lora_dropout": 0
+  }
+}

@@ -1,0 +1,13 @@
+torch==1.13.1
+transformers==4.30.2
+peft==0.4.0
+matplotlib==3.7.0
+numpy==1.23.5
+pandas==1.5.3
+scikit-learn==1.2.2
+tqdm==4.64.1
+einops==0.6.1
+patool==1.12
+sktime==0.16.1
+scipy==1.10.1
+ray[tune]==2.2.0
