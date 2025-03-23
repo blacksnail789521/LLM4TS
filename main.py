@@ -71,7 +71,7 @@ def get_args_from_parser() -> argparse.Namespace:
         "--features",
         type=str,
         default="M",
-        help="forecasting task, options:[M, S, MS]; M:multivariate predict multivariate, S:univariate predict univariate, MS:multivariate predict univariate",
+        help="forecasting task, options:[M, S, MS]; M:multivariate predict multivariate, S:univariate predict univariate, MS:multivariate predict univariate (only for downstream tasks)",
     )
     parser.add_argument(
         "--target", type=str, default="OT", help="target feature in S or MS task"
@@ -333,6 +333,7 @@ def update_args(args, fixed_params, tunable_params):
     sft_args = deepcopy(args)
     sft_args.task_name = "supervised_finetuning"
     sft_args.ft_mode = "ft"  # no need to probe
+    sft_args.features = "M" # there's no univariate task in sft
     sft_args.pred_len = sft_args.stride
     sft_args.label_len = sft_args.seq_len - sft_args.pred_len
     sft_args.setting = "sft_" + sft_args.setting

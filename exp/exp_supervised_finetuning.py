@@ -152,12 +152,6 @@ class Exp_Supervised_Finetuning(Exp_Basic):
                         batch_x, batch_x_mark, None, batch_y_mark
                     )  # embedding + encoder + decoder
 
-                    # M: multivariate predict multivariate, S: univariate predict univariate, MS: multivariate predict univariate
-                    f_dim = -1 if self.args.features == "MS" else 0
-                    # outputs = outputs[:, -self.args.pred_len :, f_dim:]
-                    # batch_y = batch_y[:, -self.args.pred_len :, f_dim:]
-                    outputs = outputs[:, :, f_dim:]
-                    batch_y = batch_y[:, :, f_dim:]
                     assert (
                         batch_y_shape == batch_y.shape
                     ), f"batch_y_shape: {batch_y_shape}, batch_y.shape: {batch_y.shape}"
@@ -263,11 +257,6 @@ class Exp_Supervised_Finetuning(Exp_Basic):
                 with torch.cuda.amp.autocast(enabled=self.args.use_amp):  # type: ignore
                     outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
 
-                f_dim = -1 if self.args.features == "MS" else 0
-                # outputs = outputs[:, -self.args.pred_len :, f_dim:]
-                # batch_y = batch_y[:, -self.args.pred_len :, f_dim:]
-                outputs = outputs[:, :, f_dim:]
-                batch_y = batch_y[:, :, f_dim:]
                 pred = outputs.detach()
                 true = batch_y.detach()
 
